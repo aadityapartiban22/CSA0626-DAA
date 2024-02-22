@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <time.h>
+
+#define N 3  
+
+void multiplyMatrices(int mat1[][N], int mat2[][N], int result[][N]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            result[i][j] = 0;
+            for (int k = 0; k < N; k++) {
+                result[i][j] += mat1[i][k] * mat2[k][j];
+            }
+        }
+    }
+}
+
+void printMatrix(int mat[][N]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int mat1[N][N] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    int mat2[N][N] = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+    int result[N][N];
+
+    clock_t start, end;
+
+    start = clock();
+
+    multiplyMatrices(mat1, mat2, result);
+    end = clock();
+
+    printf("Matrix 1:\n");
+    printMatrix(mat1);
+
+    printf("\nMatrix 2:\n");
+    printMatrix(mat2);
+
+    printf("\nResultant Matrix:\n");
+    printMatrix(result);
+
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("\nTime taken for matrix multiplication: %f seconds\n", cpu_time_used);
+
+    return 0;
+}
