@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <math.h>
+
+int power(int base, int exponent) {
+    if (exponent == 0) {
+        return 1;
+    } else {
+        return base * power(base, exponent - 1);
+    }
+}
+
+int countDigits(int num) {
+    if (num == 0) {
+        return 0;
+    } else {
+        return 1 + countDigits(num / 10);
+    }
+}
+
+int isArmstrong(int num, int n) {
+    if (num == 0) {
+        return 0;
+    } else {
+        return power(num % 10, n) + isArmstrong(num / 10, n);
+    }
+}
+
+int main() {
+    int number, sum = 0, digitCount;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    digitCount = countDigits(number);
+    if (number == isArmstrong(number, digitCount)) {
+        printf("%d is an Armstrong number.\n", number);
+    } else {
+        printf("%d is not an Armstrong number.\n", number);
+    }
+
+    return 0;
+}
